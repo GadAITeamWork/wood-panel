@@ -1,7 +1,11 @@
 import { useSnapshot } from "valtio";
 import { store } from "../store";
 
-const Info = () => {
+const Info = ({
+  targetRef,
+}: {
+  targetRef: React.RefObject<HTMLDivElement>;
+}) => {
   const {
     size,
     thickness,
@@ -13,12 +17,19 @@ const Info = () => {
     backCut,
     backGrade,
     backMatch,
+    isPDF,
   } = useSnapshot(store);
 
   return (
-    <div data-nogap className="react-option">
-      <h2>5. Your Panel</h2>
-      <h3>Download your spec sheet.</h3>
+    <div ref={targetRef} data-nogap className="react-option">
+      {isPDF ? (
+        <h2>Your Panel</h2>
+      ) : (
+        <>
+          <h2>5. Your Panel</h2>
+          <h3>Download your spec sheet.</h3>
+        </>
+      )}
       <div className="react-info">
         <h4>core</h4>
         <div>

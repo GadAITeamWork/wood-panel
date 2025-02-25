@@ -2,8 +2,19 @@ import { useSnapshot } from "valtio";
 import { store } from "../store";
 import Info from "./Info";
 
-const ConditionalOptions = () => {
-  const { activeOptions, material } = useSnapshot(store);
+const ConditionalOptions = ({
+  targetRef,
+}: {
+  targetRef: React.RefObject<HTMLDivElement>;
+}) => {
+  const {
+    activeOptions,
+    material,
+    faceCut,
+    faceGrade,
+    faceMatch,
+    faceSpecies,
+  } = useSnapshot(store);
 
   const handleMaterialChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     store.material = { value: e.target.value, text: e.target.title };
@@ -30,26 +41,26 @@ const ConditionalOptions = () => {
             <div>
               <input
                 type="radio"
-                id="react-applepay"
+                id="react-appleply"
                 name="core_material"
-                value="applepay"
-                title="applepay"
+                value="appleply"
+                title="appleply"
                 onChange={handleMaterialChange}
-                checked={material.value === "applepay"}
+                checked={material.value === "appleply"}
               />
-              <label htmlFor="react-applepay">ApplePay</label>
+              <label htmlFor="react-appleply">ApplePly</label>
             </div>
             <div>
               <input
                 type="radio"
-                id="react-veneer"
+                id="react-particle-board"
                 name="core_material"
-                value="veneer"
-                title="veneer"
+                value="particleboard"
+                title="particle board"
                 onChange={handleMaterialChange}
-                checked={material.value === "veneer"}
+                checked={material.value === "particleboard"}
               />
-              <label htmlFor="react-veneer">Veneer</label>
+              <label htmlFor="react-particle-board">Particle Board</label>
             </div>
             <div>
               <input
@@ -66,14 +77,38 @@ const ConditionalOptions = () => {
             <div>
               <input
                 type="radio"
-                id="react-particle-board"
+                id="react-naf"
                 name="core_material"
-                value="particle board"
-                title="particle board"
+                value="naf"
+                title="naf"
                 onChange={handleMaterialChange}
-                checked={material.value === "particle board"}
+                checked={material.value === "naf"}
               />
-              <label htmlFor="react-particle-board">Particle Board</label>
+              <label htmlFor="react-naf">NAF</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="react-hdf"
+                name="core_material"
+                value="hdf"
+                title="hdf"
+                onChange={handleMaterialChange}
+                checked={material.value === "hdf"}
+              />
+              <label htmlFor="react-hdf">HDF</label>
+            </div>
+            <div>
+              <input
+                type="radio"
+                id="react-scb"
+                name="core_material"
+                value="scb"
+                title="scb"
+                onChange={handleMaterialChange}
+                checked={material.value === "scb"}
+              />
+              <label htmlFor="react-scb">SCB</label>
             </div>
           </div>
         </div>
@@ -125,6 +160,30 @@ const ConditionalOptions = () => {
         <div className="react-option">
           <h2>3. Face Veneer</h2>
           <div className="react-input">
+            <label>Species</label>
+            <select
+              onChange={(e) => {
+                store.faceSpecies = {
+                  value: e.target.value,
+                  text: e.target.options[e.target.selectedIndex].innerText,
+                };
+              }}
+              value={faceSpecies.value}
+              name="face-species"
+            >
+              <option value="maple">Maple</option>
+              <option value="birch">Birch</option>
+              <option value="oak">Oak</option>
+              <option value="cherry">Cherry</option>
+              <option value="cedat">Cedar</option>
+              <option value="pine">Pine</option>
+              <option value="redwood">Redwood</option>
+              <option value="fir">Fir</option>
+              <option value="walnut">Walnut</option>
+              <option value="white-oak">White Oak</option>
+            </select>
+          </div>
+          <div className="react-input">
             <label>Cut</label>
             <select
               onChange={(e) => {
@@ -133,12 +192,13 @@ const ConditionalOptions = () => {
                   text: e.target.options[e.target.selectedIndex].innerText,
                 };
               }}
+              value={faceCut.value}
               name="face-cut"
             >
               <option value="rotary">Rotary</option>
-              <option value="plain">Plain sliced</option>
-              <option value="quarter">Quarter cut</option>
-              <option value="rift">Rift cut</option>
+              <option value="plain-sliced">Plain sliced</option>
+              <option value="quarter-cut">Quarter cut</option>
+              <option value="rift-cut">Rift cut</option>
             </select>
           </div>
           <div className="react-input">
@@ -150,13 +210,14 @@ const ConditionalOptions = () => {
                   text: e.target.options[e.target.selectedIndex].innerText,
                 })
               }
+              value={faceMatch.value}
               name="face-match"
             >
-              <option value="book">Book match</option>
-              <option value="slip">Slip match</option>
-              <option value="random">Random match</option>
-              <option value="pleasing">Pleasing match</option>
-              <option value="plank">Plank match</option>
+              <option value="book-match">Book match</option>
+              <option value="slip-match">Slip match</option>
+              <option value="random-match">Random match</option>
+              <option value="pleasing-match">Pleasing match</option>
+              <option value="whole-piece">Whole piece</option>
             </select>
           </div>
           <div className="react-input">
@@ -168,13 +229,14 @@ const ConditionalOptions = () => {
                   text: e.target.options[e.target.selectedIndex].innerText,
                 })
               }
+              value={faceGrade.value}
               name="face-grade"
             >
-              <option value="aa">AA</option>
-              <option value="a">A</option>
-              <option value="b">B</option>
-              <option value="c">C</option>
-              <option value="d">D</option>
+              <option value="AA">AA</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
             </select>
           </div>
           <div className="react-input">
@@ -216,7 +278,7 @@ const ConditionalOptions = () => {
             </select>
           </div>
           <div className="react-input">
-            <label>MATCH</label>
+            <label>Match</label>
             <select
               onChange={(e) =>
                 (store.backMatch = {
@@ -230,7 +292,7 @@ const ConditionalOptions = () => {
               <option value="slip">Slip match</option>
               <option value="random">Random match</option>
               <option value="pleasing">Pleasing match</option>
-              <option value="plank">Plank match</option>
+              <option value="plank">Whole piece</option>
             </select>
           </div>
           <div className="react-input">
@@ -253,7 +315,7 @@ const ConditionalOptions = () => {
         </div>
       );
     case 4:
-      return <Info />;
+      return <Info targetRef={targetRef} />;
   }
 };
 

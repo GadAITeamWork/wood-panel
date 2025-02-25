@@ -10,7 +10,7 @@ const Render = () => {
       <Canvas>
         <PerspectiveCamera
           makeDefault
-          position={[0, 1.5, 4.2]}
+          position={[0, 1.5, 3.5]}
           rotation-x={-Math.PI * 0.1}
         />
         <Environment preset="warehouse" />

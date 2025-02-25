@@ -2,8 +2,11 @@ import { useSnapshot } from "valtio";
 import { store } from "../store";
 import { Download, LeftArrow, Repeat, RightArrow } from "./Svgs";
 import ConditionalOptions from "./ConditionalOptions";
+// import generatePDF, { Margin } from "react-to-pdf";
+import { useRef } from "react";
 
 const Configuration = () => {
+  const targetRef = useRef<HTMLDivElement>(null);
   const { activeOptions } = useSnapshot(store);
 
   const handleNext = () => {
@@ -19,11 +22,19 @@ const Configuration = () => {
   const handleStartOver = () => {
     store.activeOptions = 0;
   };
-  const handleDownload = () => {};
+  // const handleDownload = () => {
+  //   generatePDF(() => targetRef.current!, {
+  //     filename: "panel",
+  //     page: {
+  //       margin: Margin.SMALL,
+  //       format: [100, 150],
+  //     },
+  //   });
+  // };
 
   return (
     <div id="react-config">
-      <ConditionalOptions />
+      <ConditionalOptions targetRef={targetRef} />
       <div className="react-button-group">
         {activeOptions !== 0 && (
           <button
@@ -36,10 +47,15 @@ const Configuration = () => {
           </button>
         )}
         {activeOptions < 4 && (
-          <button onClick={handleNext} className="react-button-group_button">
-            <span>Next</span>
-            <RightArrow />
-          </button>
+          <>
+            <button onClick={handleNext} className="react-button-group_button">
+              <span>Next</span>
+              <RightArrow />
+            </button>
+            <p className="note">
+              Inner ply will vary by thickness for illustration purposes only
+            </p>
+          </>
         )}
 
         {activeOptions > 3 && (
@@ -53,13 +69,12 @@ const Configuration = () => {
           </button>
         )}
         {activeOptions > 3 && (
-          <button
-            onClick={handleDownload}
-            className="react-button-group_button"
-          >
-            <span>Download CSI Spec</span>
-            <Download />
-          </button>
+          <a href="/CSISpec.pdf" download="CSISpec">
+            <button className="react-button-group_button">
+              <span>Download CSI Spec</span>
+              <Download />
+            </button>
+          </a>
         )}
       </div>
     </div>

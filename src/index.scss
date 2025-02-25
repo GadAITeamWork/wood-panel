@@ -16,6 +16,10 @@ body,
   padding-top: 24px;
 }
 
+a {
+  text-decoration: none;
+}
+
 #react-container {
   width: 100%;
   margin: 0px auto;
@@ -40,6 +44,12 @@ body,
 #react-config {
   position: relative;
   width: 33%;
+}
+
+.note {
+  font-size: 0.75rem;
+  line-height: calc(0.75rem * 1.5);
+  margin-inline: auto;
 }
 
 .react-button-group {
@@ -178,6 +188,29 @@ body,
 }
 
 .react-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 0px;
+  border-bottom: 1px solid #eeece1;
+  h4 {
+    text-transform: uppercase;
+    font-size: 1rem;
+    line-height: calc(1rem * 1.5);
+  }
+  div {
+    display: flex;
+    flex-direction: column;
+    p {
+      text-align: right;
+      text-transform: uppercase;
+      font-size: 1rem;
+      line-height: calc(1rem * 1.5);
+      color: #6d6e67;
+    }
+  }
+}
+
+.react-pdf {
   display: flex;
   justify-content: space-between;
   padding: 16px 0px;
